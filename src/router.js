@@ -11,6 +11,7 @@ import BossInfo from './container/bossinfo/bossinfo'
 import GeniusInfo from './container/geniusinfo/geniusinfo'
 import DashBoard from './component/dashboard/dashboard'
 import NotFound from './container/notfound/index'
+import Chat from './component/chat/chat'
 
 export default class ERouter extends React.Component{//这是一个router组件
     render(){
@@ -23,6 +24,7 @@ export default class ERouter extends React.Component{//这是一个router组件
                         <Route path='/geniusinfo' component={GeniusInfo}></Route>
 				        <Route path='/login' component={Login}></Route>
 				        <Route  path='/register' component={Register}></Route>
+                        <Route path="/chat/:user" component={Chat}></Route>
                         <Route path='/user' component={DashBoard}></Route>
                         <Route component={NotFound}></Route>
                     </Switch>          

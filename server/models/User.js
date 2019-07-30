@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 //create Schema
 //数据库结构
 const UserSchema = new Schema({
-    'user':{type:String, 'require':true},
-    'psw':{type:String, 'require':true},
+    'user':{'type':String, 'require':true},
+    'psw':{'type':String, 'require':true},
     'type':{'type':String, 'require':true},
     //头像
     'avatar':{'type':String},

@@ -5,8 +5,34 @@ const utils = require('utility');
 var svgCaptcha = require('svg-captcha');
 
 const User = require('../../models/User.js')
+const Chat = require('../../models/Chat.js')
 const Router = express.Router();
 const _filter = {'psw':0,'__v':0}
+
+
+/**
+ * 聊天新界面相关
+ */
+//$route GET  user/getmsglist
+//@desc 返回数据库中的数据
+//@access public
+Router.get('/getmsglist',function(req, res){
+    const user = req.cookies.user;
+    //{'$or':[{from:user,to:user}]}
+    Chat.find({},function(err,doc){
+        if(!err){
+            return res.json({code:0,msgs:doc})
+        }
+    })
+})
+
+
+
+
+
+
+
+
 
 
 //$route GET  user/list?type=boss     genius

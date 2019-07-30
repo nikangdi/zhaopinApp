@@ -1,7 +1,23 @@
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
 const logger = require("morgan");
+
+const app = express();
+//socket.io work with express
+const server = require('http').Server(app)
+const io = require('socket.io')(server);
+    io.on('connection',function(socket){
+        //io是一个全局的连接， socket形参为 但前连接的连接
+        console.log( 'user is connected')
+        socket.on('sendmsg',function(data){
+            console.log(data)
+            //接收到data并广播到全局
+            io.emit('recvmsg',data)
+        })
+    })
+
+
+
 //session
 const session = require("express-session")
 //cookie-parser --- 利用 -parser读取cookie
@@ -12,6 +28,7 @@ const session = require("express-session")
 //中间件引入
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+
 
 //配置session
 app.use(session({
@@ -38,9 +55,11 @@ mongoose.connect(DB_URL)
     console.log(err)
 })
 
+
 //后台日志生成相关
 //dev状态码带有色彩的日志输出
 app.use(logger('dev'));
+
 
 //中间件配置
 // bodyParser配置
@@ -49,13 +68,19 @@ app.use(bodyParser.json())
 //cookieParser配置
 app.use(cookieParser())
 
+
 //路由配置
 // app.get('/api/test',(req,res)=>{
 //     res.send('this is express server api test')
 // })
 app.use('/user',user)
 
-app.listen(9093,function(){
+
+//express 与 socket.io关联后  监听server
+// app.listen(9093,function(){
+//     console.log('Node app start at port 9093')
+// })
+server.listen(9093,function(){
     console.log('Node app start at port 9093')
 })
 
