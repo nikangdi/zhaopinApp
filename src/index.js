@@ -5,14 +5,13 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Router from './router'
 import {Provider} from 'react-redux'
-import {createStore, applyMiddleware} from 'redux'
+import {createStore, applyMiddleware,compose} from 'redux'
 import thunk from 'redux-thunk'
 import reducers from './reducer'
 import './config'
 
-
-const store = createStore(reducers,
-    applyMiddleware(thunk)
+const store = createStore(reducers,compose(
+    applyMiddleware(thunk),window.devToolsExtension?window.devToolsExtension():f=>f)
 )
 ReactDOM.render(
     <Provider store={store}>
