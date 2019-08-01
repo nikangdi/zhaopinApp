@@ -11,9 +11,11 @@
 	width: 100%;
 }
 
+.fixd-header .am-icon{
+	display:none;
+}
 
-
-.fixd-header.am-navbar{
+.fixd-header.am-navbar {
 	position: fixed;
 	top: 0;
 	width: 100%;
@@ -29,9 +31,28 @@
 	padding-right:15px;
 	text-align: right;
 }
+
+/* 手动修复表情grid组件的bug,表情居中 */
+#chat-page .am-grid-icon{
+	display:none;
+}
+#chat-page .am-grid-text{
+	margin-top:0;
+}
+
+
+
 .stick-footer{
 	z-index:10;
-	position:absolute;
+	position:fixed;
+	/* position: absolute; */
 	bottom:0;
 	width:100%;
+}
+
+ #chat-page .fixd-header1.am-navbar.am-navbar-dark {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index:99;
 }

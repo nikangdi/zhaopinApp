@@ -5,20 +5,27 @@ import {Redirect,Switch, Route} from 'react-router-dom'
 import NavLinkBar from '../navlink/navlink'
 import Boss from '../../component/boss/boss'
 import Genius from '../../component/genius/genius'
-
+import {getMsgList,recvMsg} from '../../redux/chat.redux'
 import User from '../../component/user/index'
+import Msg from '../../component/msg/msg'
 
-function Msg(){
-	return <h2>消息列表页面</h2>
-}
+// function Msg(){
+// 	return <h2>消息列表页面</h2>
+// }
 // function User(){
 // 	return <h2>个人中心页面</h2>
 // }
 @connect(
-	state=>state
+	state=>state,
+	{getMsgList,recvMsg}
 )
 class Dashboard extends React.Component{
-
+	componentDidMount(){
+		if(!this.props.chat.chatMsg.length) { //如果没有这个判断 ，每次来回切进聊天页面就会有多个socket在连接，就会有多条信息
+		this.props.getMsgList() //获取聊天信息列表
+		this.props.recvMsg();
+		}
+	}
 	render(){
 		const {pathname} = this.props.location
 		const user = this.props.user
@@ -79,7 +86,7 @@ class Dashboard extends React.Component{
 		// // <Redirect to={navList[3].path}></Redirect>
 		// <Route component={NotFound}></Route>
 		return (<div>
-		<NavBar className='fixd-header' mode='dard'>{navList.find(v=>v.path==pathname).title}</NavBar>
+		<NavBar className='fixd-header' mode='dark' >{navList.find(v=>v.path==pathname).title}</NavBar>
 		<div style={{marginTop:45}}>
 				<Switch>
 					{navList.map(v=>(

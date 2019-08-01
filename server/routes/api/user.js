@@ -9,7 +9,7 @@ const Chat = require('../../models/Chat.js')
 const Router = express.Router();
 const _filter = {'psw':0,'__v':0}
 
-
+// Chat.remove({},function(e,d){})
 /**
  * 聊天新界面相关
  */
@@ -17,15 +17,53 @@ const _filter = {'psw':0,'__v':0}
 //@desc 返回数据库中的数据
 //@access public
 Router.get('/getmsglist',function(req, res){
-    const user = req.cookies.user;
-    //{'$or':[{from:user,to:user}]}
-    Chat.find({},function(err,doc){
-        if(!err){
-            return res.json({code:0,msgs:doc})
-        }
+    const user = req.cookies.userid;
+    // console.log(user)
+    User.find({},function(err,userdoc){
+
+        //查找全部用户信息，并且重新整合用户信息到一个对象中
+        //  users = { _id: {name,avatar} }
+        let users={};
+        userdoc.forEach(item=>{
+            users[item._id]={name:item.user,avatar:item.avatar}
+        })
+        //{'$or':[{from:user},{to:user}]}  //多条件查找
+        Chat.find({'$or':[{from:user},{to:user}]},function(err,doc){
+            if(!err){
+                // console.log({code:0,msgs:doc,users:users})
+                return res.json({code:0,msgs:doc,users:users})
+            }
+        })
     })
+    
 })
 
+
+//$route POST  user/getmsglist
+//@desc 返回数据库中的数据
+//@access public
+Router.post('/readmsg',function(req, res){
+    /**
+     * 前后端获取userid
+     */
+    //前端获取用户信息  从redux store中获取 this.props.user._id
+    //后端获取用户信息  从cookie中获取req.cookies.userid
+    const userid = req.cookies.userid;
+    const from = req.body.from;
+    console.log(from)
+
+    Chat.update(  
+        {from,to:userid},
+        {'$set':{read:true}},
+        {'multi':true},  // update默认只修改查到的第一条数据，加这个参数，则修改全局  
+        function(err,doc){
+        // console.log(doc)  //{ n: 6, nModified: 6, ok: 1 }
+        if(!err){
+            return res.json({code:0,num:doc.nModified})
+        }
+        return res.json({code:1,msg:'修改失败'})
+    })
+})
 
 
 
