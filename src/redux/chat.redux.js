@@ -40,6 +40,7 @@ export  function chat(state=initState,action){
         case type.MSG_READ:
             const {from,num} = action.payload;
             return {...state,chatMsg:state.chatMsg.map(v=>({...v,read:from==v.from?true:v.read})),unread:state.unread-num};
+        //用from 查找很巧妙。因为当前所有的chatMsg 只有两种，一种是from为我，一种是to是我，只要查到from为指定目标的消息，另一方肯定是我
         default:
             return state;
     }

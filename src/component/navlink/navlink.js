@@ -22,7 +22,7 @@ class NavLinkBar extends React.Component{
 			<TabBar>
 				{navList.map(v=>(
 					<TabBar.Item
-						badge={v.path=='/user/msg'?this.props.unread:0}   //徽标
+						badge={v.path=='/user/msg'? this.props.unread>=0?this.props.unread:0 :0}   //徽标   ,考虑负值
 						key={v.path}
 						title={v.text}
 						icon={{uri: require(`./img/${v.icon}.png`)}}
