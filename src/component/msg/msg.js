@@ -1,7 +1,7 @@
 import React from 'react'
 import {List,Badge} from 'antd-mobile'
 import {connect} from 'react-redux'
-import { get } from 'browser-cookies';
+// import { get } from 'browser-cookies';
 
 
 

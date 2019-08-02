@@ -63,14 +63,14 @@ import  ChangeForm from '../../component/changeForm'
 // this.handleChange改为this.props.handleChange
 @ChangeForm
 class Login extends React.Component{
-    constructor(props){
-        super(props);
-        // this.state = {
-        //         user:'',//用户名
-        //         psw:'',//密码
-        //         captchaInput:""  //输入的验证码
-        // }
-    }
+    // constructor(props){
+    //     super(props);
+    //     this.state = {
+    //             user:'',//用户名
+    //             psw:'',//密码
+    //             captchaInput:""  //输入的验证码
+    //     }
+    // }
     handleLogin=()=>{
         //登录按钮点击事件
         this.props.login(this.props.state)

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Result, List,Brief,WhiteSpace,Modal,Button} from 'antd-mobile'
+import {Result, List,WhiteSpace,Modal,Button} from 'antd-mobile'
 import browserCookie from 'browser-cookies'
 import {Redirect} from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -11,9 +11,9 @@ import {logoutSubmit} from '../../redux/user.redux'
     {logoutSubmit}
 )
 class User extends React.Component{
-    constructor(props){
-        super(props)
-    }  
+    // constructor(props){
+    //     super(props)
+    // }  
     logout = ()=>{
         // console.log('logout')
         const alert = Modal.alert ;

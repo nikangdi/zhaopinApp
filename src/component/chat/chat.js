@@ -2,14 +2,7 @@ import React from 'react'
 import {List,InputItem,NavBar,Icon,Grid} from 'antd-mobile'
 import {connect} from 'react-redux'
 import {getChatId} from '.././../util'
-//前端部分socket.io 
-import io from 'socket.io-client'
 import {getMsgList,sendMsg,recvMsg,readMsg} from '../../redux/chat.redux'
-
-
-
-const socket = io('ws://localhost:9093')//此时链接是跨域的,所以需要手动连接一下
-
 
 @connect(
     state=>state,
@@ -128,7 +121,7 @@ class Chat extends React.Component{
                ):(
                 <List key={v._id} className='chat-me'>
                     <Item
-                    extra={<img src={avatar}/>}
+                    extra={<img src={avatar} alt="头像"/>}
                     >{v.content}</Item>
                 </List>
                )

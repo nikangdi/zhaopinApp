@@ -14,15 +14,15 @@ const RadioItem = Radio.RadioItem
     {register}
 )
  class Register extends React.Component{
-    constructor(props){
-        super(props);
-        // this.state={
-        //     user:'',//用户名
-        //     psw:'',//密码
-        //     repeatpsw:'',//确认密码
-        //     type:'genius',//选择身份
-        // }
-    }
+    // constructor(props){
+    //     super(props);
+    //     this.state={
+    //         user:'',//用户名
+    //         psw:'',//密码
+    //         repeatpsw:'',//确认密码
+    //         type:'genius',//选择身份
+    //     }
+    // }
     handleRegister=()=>{
         //注册事件
         this.props.register(this.props.state)
@@ -68,7 +68,7 @@ const RadioItem = Radio.RadioItem
                     <WhiteSpace />
                     <div style={{textAlign:'center'}}>
 					<Button inline  onClick={this.login} style={{ marginRight: '40px' }} >登录</Button>
-					<Button  inline   type='primary' onClick={this.handleRegister} type='primary'>注册</Button>
+					<Button  inline   type='primary' onClick={this.handleRegister} >注册</Button>
                     </div>
                 </WingBlank>
             </div>
