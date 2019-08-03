@@ -1,10 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const logger = require("morgan");
-
 //引入数据库schema Chat
 const Chat =require('./models/Chat') 
 const app = express();
+
+
 //socket.io work with express
 const server = require('http').Server(app)
 const io = require('socket.io')(server);

@@ -140,7 +140,7 @@ Router.post("/login",(req,res)=>{
     const {user, psw } = req.body
     // console.log(user,psw)
     const captcha = req.body.captchaInput.toString().toLowerCase(); //获取表单输入的验证码 ,加一步tostring解决全时数字输入时报错的问题
-    console.log(`验证码表单：${captcha},验证码session:${req.session.captcha}`)
+    // console.log(`验证码表单：${captcha},验证码session:${req.session.captcha}`)
     if(captcha !== req.session.captcha){ //验证码验证
         return res.status(400).send({code:1,msg:"验证码不正确！"})
       }
